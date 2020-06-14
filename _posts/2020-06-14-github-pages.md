@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: GitHub Pages and Jekyll
 excerpt_separator: <!--more-->
 tags: github-pages jekyll

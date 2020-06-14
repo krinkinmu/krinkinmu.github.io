@@ -14,8 +14,6 @@ tags: github-pages jekyll
 [FrontMatter]: https://jekyllrb.com/docs/front-matter/ "Jekyll Front Matter"
 [JekyllVariables]: https://jekyllrb.com/docs/variables/ "Jekyll Varibales"
 
-# Introduction
-
 I'm mostly trying to stay away from any kind of front-end related engineering
 because I've never found it interesting enough to spend a reasonable amount of
 time to learn it.

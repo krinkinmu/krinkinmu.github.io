@@ -114,6 +114,7 @@ operators, including conditions and loops.
 Let's take a look at the following [markdown][Markdown] template for the list of
 posts page using Liquid:
 
+{% raw %}
 ```markdown
 ---
 layout: default
@@ -129,6 +130,7 @@ layout: default
 
 {% endfor %}
 ```
+{% endraw %}
 
 The document starts with so called [Front Matter][FrontMatter]. Front Matter
 tells Jekyll how the file must be processed. I defer you to the Jekyll

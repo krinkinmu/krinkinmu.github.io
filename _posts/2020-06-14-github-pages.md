@@ -1,6 +1,7 @@
 ---
 layout: post
 title: GitHub Pages and Jekyll
+excerpt_separator: <!--more-->
 tags: github-pages jekyll
 ---
 
@@ -23,6 +24,8 @@ That being said, on a subjective level I like the idea of keeping my posts in
 VCS close to the code, so I started looking at [GitHub Pages][GitHubPages].
 What follows is a very brief explanation of what I found with references to
 other sources.
+
+<!--more-->
 
 # Getting Started
 

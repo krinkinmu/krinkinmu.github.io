@@ -346,7 +346,7 @@ For example, here is the implementation of `split_at_mut` method for slices in
 the [Rust] standard library that basically split slice in two at the given
 position:
 
-```
+```rust
 pub fn split_at_mut(&mut self, mid: usize) -> (&mut [T], &mut [T]) {
   let len = self.len();
   let ptr = self.as_mut_ptr();

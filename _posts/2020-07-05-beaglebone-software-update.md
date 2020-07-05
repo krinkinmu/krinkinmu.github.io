@@ -5,10 +5,10 @@ excerpt_separator: <!--more-->
 tags: beaglebone uboot linux-kernel tftp nfs busybox
 ---
 [Bootlin]: https://bootlin.com/ "Bootlin"
-[LinuxKernel]: https://www.kernel.org/ "Linux Kernel"
-[BeagleBoneBlack]: https://beagleboard.org/black "BeagleBone Black"
-[BeagleBoneBlackWireless]: https://beagleboard.org/black-wireless "BeagleBone Black Wireless"
-[DeviceTree]: https://en.wikipedia.org/wiki/Device_tree "Device Tree"
+[Linux Kernel]: https://www.kernel.org/ "Linux Kernel"
+[BeagleBone Black]: https://beagleboard.org/black "BeagleBone Black"
+[BeagleBone Black Wireless]: https://beagleboard.org/black-wireless "BeagleBone Black Wireless"
+[Device Tree]: https://en.wikipedia.org/wiki/Device_tree "Device Tree"
 [U-Boot]: https://github.com/u-boot/u-boot "U-Boot"
 [BusyBox]: https://www.busybox.net/ "BusyBox"
 [TRM]: https://www.ti.com/lit/ug/spruh73q/spruh73q.pdf "Technical Reference Manual"
@@ -18,12 +18,12 @@ tags: beaglebone uboot linux-kernel tftp nfs busybox
 [MMC]: https://en.wikipedia.org/wiki/MultiMediaCard "MMC"
 [EMMC]: https://en.wikipedia.org/wiki/MultiMediaCard#eMMC "eMMC"
 [Ethernet]: https://en.wikipedia.org/wiki/Ethernet "Ethernet"
-[ThePreviousPost]: {% post_url 2020-06-27-beaglebone-black-uboot-console %} "the previous post"
+[the previous post]: {% post_url 2020-06-27-beaglebone-black-uboot-console %} "the previous post"
 
 I continue going through [Bootlin] training materials on embedded systems and
-[LinuxKernel]. In this article I will cover building and updating [LinuxKernel]
-and [U-Boot] on my [BeagleBoneBlackWireless], but the same instruction should
-apply for [BeagleBoneBlack].
+[Linux Kernel]. In this article I will cover building and updating
+[Linux Kernel] and [U-Boot] on my [BeagleBone Black Wireless], but the same
+instruction should apply for [BeagleBone Black].
 
 <!--more-->
 
@@ -31,9 +31,9 @@ apply for [BeagleBoneBlack].
 
 This article assumes that you already now how to connect to the device via debug
 serial port and get into the [U-Boot] console. This part was covered hopefully
-in enough details in [ThePreviousPost].
+in enough details in [the previous post].
 
-In [ThePreviousPost] I also meantioned that we don't need a memory card, but
+In [the previous post] I also meantioned that we don't need a memory card, but
 this time around we, unfortunately will need it. So make sure that you have a
 [micro SD](https://en.wikipedia.org/wiki/SD_card). Format the memory card to
 have a primary bootable partition of type *WIN95 FAT32 (LBA)* (partition code
@@ -44,14 +44,14 @@ have a primary bootable partition of type *WIN95 FAT32 (LBA)* (partition code
   do that.
 
 Beside the memory card we would need some software. At the very least we need
-[U-Boot] and [LinuxKernel] that we want to install on the device and the tools
+[U-Boot] and [Linux Kernel] that we want to install on the device and the tools
 required to build them.
 
-In this post I will cover how to load [LinuxKernel] on the device remotely using
-[TFTP]. This will not store the [LinuxKernel] on the device permanently and, as
-a result, it's not an appropriate method to create a device that will be able to
-work standalone. However, if you are developing and need to change
-[LinuxKernel], [U-Boot] or other pieces of software often it's easier to load
+In this post I will cover how to load [Linux Kernel] on the device remotely
+using [TFTP]. This will not store the [Linux Kernel] on the device permanently
+and, as a result, it's not an appropriate method to create a device that will
+be able to work standalone. However, if you are developing and need to change
+[Linux Kernel], [U-Boot] or other pieces of software often it's easier to load
 them remotely.
 
 On the same note, I will also use [NFS] for the root file system. That makes it
@@ -69,8 +69,8 @@ cd $WS
 
 ## Toolchain
 
-To build [LinuxKernel], [U-Boot] and [BusyBox] for [BeagleBoneBlack] or
-[BeagleNoneBlackWireless] you will need a compiler for the [ARM] architecture:
+To build [Linux Kernel], [U-Boot] and [BusyBox] for [BeagleBone Black] or
+[BeagleBone Black Wireless] you will need a compiler for the [ARM] architecture:
 
 ```sh
 sudo apt-get install gcc-arm-linux-gnueabi
@@ -82,7 +82,7 @@ installed on my machine, so I'm not covering them here.
 
 ## Linux Kernel
 
-Let's start with downloading [LinuxKernel]:
+Let's start with downloading [Linux Kernel]:
 
 ```sh
 cd $WS
@@ -93,10 +93,10 @@ git fetch linux-next
 git checkout next-20200703 -b next
 ```
 
-> *NOTE:* I'm using the latest *next* branch for the [LinuxKernel] at the moment
-  of writing. You may prefer to use the latest stable release instead. Using a
-  stable version will simplify the debugging if something goes wrong, because
-  you will know that at the very least the [LinuxKernel] is stable.
+> *NOTE:* I'm using the latest *next* branch for the [Linux Kernel] at the
+  moment of writing. You may prefer to use the latest stable release instead.
+  Using a stable version will simplify the debugging if something goes wrong,
+  because you will know that at the very least the [Linux Kernel] is stable.
 
 Now we need to configure and cross compile the new kernel using the installed toolchain. Cross compiling the kernel is relatively easy, all you need is to set
 a couple of environment variables that specify the architecture and the
@@ -118,9 +118,9 @@ make omap2plus_defconfig
 We also want to use the power USB cable to establish a network between the host
 computer and the board.
 
-> *NOTE:* [BeagleBoneBlackWireless] doesn't have an [Ethernet] port, but even if
-  it had my laptop doesn't have an [Ethernet] port. So if it's possible to use
-  the USB power cable for networking as well, then it would be convenient.
+> *NOTE:* [BeagleBone Black Wireless] doesn't have an [Ethernet] port, but even
+  if it had my laptop doesn't have an [Ethernet] port. So if it's possible to
+  use the USB power cable for networking as well, then it would be convenient.
 
 In order to do that we need to enable a few more configuration options. To get
 to the configuration menu I use this:
@@ -152,8 +152,8 @@ ls -l arch/arm/boot/zImage arch/arm/boot/dts/am335x-boneblack-wireless.dtb
 ```
 
 > *NOTE:* *am335x-boneblack-wireless.dtb* is a [DeviceTree] file that is
-  specific for [BeagleBoneBlackWireless]. For the [BeagleBoneBlack] you should
-  be able to find a different [DeviceTree] file in the same directory.
+  specific for [BeagleBone Black Wireless]. For the [BeagleBone Black] you
+  should be able to find a different [DeviceTree] file in the same directory.
 
 ## U-Boot
 
@@ -169,11 +169,11 @@ export CROSS_COMPILE=arm-linux-guneabi-
 make am335x_evm_defconfig
 ```
 
-Before actually building [U-Boot] a few words about how [BeagleBoneBlack] and
-[BeagleBoneBlackWireless] boot. For a more detailed overview please refer to
-the [TRM] starting from the paragraph 26.1.8.5.3 Booting Procedure. What I want
-to draw attention here is that the board supports booting from raw device and
-booting from a file system.
+Before actually building [U-Boot] a few words about how [BeagleBone Black] and
+[BeagleBone Black Wireless] boot. For a more detailed overview please refer to
+the [TRM] starting from the paragraph *26.1.8.5.3 Booting Procedure*. What I
+want to draw attention here is that the board supports booting from raw device
+and booting from a file system.
 
 In the raw mode the firmware will look for the bootloader in certain parts of
 the [EMMC]. When booting from the file system the firmware will treat the [EMMC]
@@ -345,13 +345,13 @@ and zero-out parts of the [EMMC] that store the old bootloader.
 We have a memory card with the bootloader we built earlier, how can we make the
 board to use it?
 
-![The S2 switch](/assets/s2.jpg)
+![The S2 switch](/assets/s2.png)
 
 The board has a magic *S2* button, we need to push this button before powering
 the board and it will automatically try to boot from the memory card.
 
 Once you see the [U-Boot] prompt push *SPACE* to interrupt the boot process and
-drop into the [U-Boot] console, just like was described in [ThePreviousPost].
+drop into the [U-Boot] console, just like was described in [the previous post].
 
 ## Booting Linux Kernel
 
@@ -415,14 +415,14 @@ boot
 
 If everything goes fine, [U-Boot] should download the kernel and [DeviceTree]
 file over [TFTP] and place the in the right places in memory. Then it will
-pass the control over to the [LinuxKernel] it just put in memory and
+pass the control over to the [Linux Kernel] it just put in memory and
 additionally will instruct the kernel to mount the root file system over [NFS].
 
 Once the load is finished you should have access to the terminal on the board.
 
 ## Formatting eMMC
 
-At this point we were able to boot the custom [LinuxKernel] and [U-Boot], but
+At this point we were able to boot the custom [Linux Kernel] and [U-Boot], but
 the procedure we used is quite long and error prone. That's quite the opposite
 of what we wnated to achive.
 

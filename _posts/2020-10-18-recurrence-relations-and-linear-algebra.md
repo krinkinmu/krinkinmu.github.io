@@ -25,8 +25,8 @@ $$
   F_n =
   \begin{cases}
     F_{n - 1} + F_{n - 2}, & \text{if $n \ge 2$} \\
-    1, & \text{if $n \eq 1$} \\
-    0, & \text{if $n \eq 0$}
+    1, & \text{if $n = 1$} \\
+    0, & \text{if $n = 0$}
   \end{cases}
 $$
 

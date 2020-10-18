@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: math
 title: Recurrence relations and linear algebra
 excerpt_separator: <!--more-->
 tags: linear-algebra math recurrence-relations
@@ -21,19 +21,19 @@ still required though.
 And of course I will start with a well known example of Fibonacci sequence
 defined as follows:
 
-\\[
+\[
   F_n =
   \begin{cases}
     F_{n - 1} + F_{n - 2}, & \text{if $n \ge 2$} \\
     1, & \text{if $n \eq 1$} \\
     0, & \text{if $n \eq 0$}
   \end{cases}
-\\]
+\]
 
 It defines a sequence starting like this:
 
-\\[
+\[
   0, 1, 1, 2, 3, 5, 8, \ldots
-\\]
+\]
 
 The rest of the article is TBD, after I test the math rendering.

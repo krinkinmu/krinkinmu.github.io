@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Nintendo Wiichuk interface and input devices
 excerpt_separator: <!--more-->
 tags: beaglebone linux-kernel i2c input-device

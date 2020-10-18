@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: A few notes on Rust borrow checker
 excerpt_separator: <!--more-->
 tags: rust borrow-checker

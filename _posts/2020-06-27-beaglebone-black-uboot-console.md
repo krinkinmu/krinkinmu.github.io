@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Eneter U-Boot console on BeagleBone Black Wireless
 excerpt_separator: <!--more-->
 tags: beaglebone uboot

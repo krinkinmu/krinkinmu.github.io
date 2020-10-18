@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: FTDI protocol
 excerpt_separator: <!--more-->
 tags: usb linux-kernel ftdi

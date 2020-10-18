@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Getting started with EFI
 excerpt_separator: <!--more-->
 tags: efi clang microsoft

@@ -1,3 +1,8 @@
 theme: jekyll-theme-hacker
 title: "Welcome to the Mike's homepage!"
 description: "Various things I do outside of work: fun, boring, anything really."
+author:
+  name: "Mike Krinkin"
+  location: "Dublin, Ireland"
+  email: "krinkin.m.u@gmail.com"
+  github: "krinkinmu"

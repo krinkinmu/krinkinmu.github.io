@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: UEFI handles, GUIDs and protocols
 excerpt_separator: <!--more-->
 tags: efi clang microsoft

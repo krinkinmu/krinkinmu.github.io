@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Updating kernel and bootloader on BeagleBone Black Wireless
 excerpt_separator: <!--more-->
 tags: beaglebone uboot linux-kernel tftp nfs busybox

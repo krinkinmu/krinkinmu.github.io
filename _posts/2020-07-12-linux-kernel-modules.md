@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Kernel modules, device drivers and Device Tree
 excerpt_separator: <!--more-->
 tags: beaglebone linux-kernel

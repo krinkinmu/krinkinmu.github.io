@@ -1,5 +1,5 @@
 ---
-layout: math
+layout: post
 title: Recurrence relations and linear algebra
 excerpt_separator: <!--more-->
 tags: linear-algebra math recurrence-relations

@@ -113,7 +113,7 @@ $$
 $$
 
 We can continue this expnasion until we get \\(F_1\\) and \\(F_0\\), our first
-to members, in the right side of the equation:
+two members, in the right side of the equation:
 
 $$
   \begin{bmatrix}
@@ -154,7 +154,7 @@ and additions of integer numbers are equal constant time operations.
   asymptotic improvement using the matrix multiplication method over the naive
   method.
 
-# Linear spaces basises
+# Basises and coordinates
 
 We now have Fibonacci recurrence relation written in the matrix form. That
 means that we can treat the matrix *A* as a linear operator in vector space
@@ -164,21 +164,26 @@ In order to see how does it help us we should talk a little bit about basises
 of vector spaces. More specifically, we should note that the same vector space
 may have multiple different basises.
 
-For example, let's say we have a plane and we use *x* and *y* coordinates to
-describe vectors on that plane. That basically means that we can express any
-vector on the plane as a linear combination of two orthogonal unit vectors:
+For example, let's say we have a vector *t* on a plane (\\(\mathbb{R}^2\\))
+and we use *x* and *y* coordinates to describe the vector on that plane.
 
 TODO insert a picture here
 
-The pair of vectors chosen above is convinient to use, but that's by no means
-the only pair of vectors that could be used for this purpose. For example,
-these two vector will work as well:
+Basically *x* and *y* coordinates tell us how many basis vectors we need to
+combine to get the original vector *t*. 
 
-TODO insert a picture
+The pair of basis vectors chosen above is convinient to use, but that's by no
+means the only pair of vectors that could be used for this purpose. For
+example, these two vector will work as well:
 
-It's easy to see that \\(x = -u\\) and \\(y = -v\\) and therefore anything that
-could be expressed as a linear combination of *x* and *y* could also be
-expressed as a linear combination of *u* and *v*.
+TODO insert a picture here
+
+We can use those vectors as a basis as well. However the coordinates of the
+vector *t* will be different if we use them as a vector.
+
+In this particular case all we need to change the basis is to change the
+signes of the *x* and *y* coordinates to the opposite, but in general the
+transformation might be more complicated.
 
 So we can have different basises for the same vector space, so what? Well, the
 matrix of the same linear operator might look differently in different basises.
@@ -188,23 +193,30 @@ more convenient to work with?
 # Basis changes
 
 Before we go into details regarding what matrix would be convenient to work
-with let's close one purely technical question. Say we have a matrix of linear
-operator in one basis, how can we convert it to represent the same linear
-operator but in different basis?
+with let's close one purely technical question. Say we have a matrix of a
+linear operator in one basis, how can we convert it to represent the same
+linear operator but in different basis?
 
-In the example above, we showed that vectors *x* and *y* that formed a basis
-in \\(\mathbb{R}^2\\) can be represented as a linear combination of *u* and
-*v* that also form a basis in \\(\mathbb{R}^2\\). That's obviously true for
-all basises, just because any element of a vector space, including a basis
-vector, can be expressed as a linear combination of basis vectors.
+For a set of vectors to be a basis it's necessary that every element of the
+vector space can be expressed as a linear combination of the basis vectors.
+That's, of course, also true for vectors of the different basis.
 
 In practice that means that we can find a matrix *S*, that given coordinates of
-a vector in *x* and *y* basis transforms them into the coordinates of the same
-vector, but in *u* and *v* basis.
+a vector in one basis transforms them into coordinates of the same vector in
+another basis.
 
-In general if \\(x = s_{0,0} u + s_{1,0} v\\) and
-\\(y = s_{0,1} u + s_{1,1} v\\), then it's easy to see that this matrix will
-be:
+Let's say that the original basis consits of vector *x* and *y* and the target
+basis consists of vector *u* and *v*. We know that vectors *x* and *y* can
+be expressed as a linear combination of vectors *u* and *v*.
+
+Without loss of generality lets say that  \\(x = s_{0,0} u + s_{1,0} v\\) and
+\\(y = s_{0,1} u + s_{1,1} v\\). In other words, in the basis cosisting of
+vectors *u* and *v* the vector *x* has coordinates \\(s_{0,0}\\) and
+\\(s_{1,0}\\), and the vector *y* has coordinates \\(s_{0,1}\\) and
+\\(s_{1,1}\\).
+
+It's easy to see that the matrix that converts coordinates in basis *x* and
+*y* to the coordinates in basis *u* and *v* will look like this:
 
 $$
   S =
@@ -214,7 +226,7 @@ $$
   \end{bmatrix}
 $$
 
-So now we can easily convert coordinates of the vector in one basis to
+So now we can easily convert coordinates of a vector in one basis to
 coordinates of the same vector in another basis. How can we extend it to linear
 operators?
 
@@ -228,10 +240,15 @@ coordinates using matrix *S*, then we can use the inverse matrix to do the
 opposite transformation from *u* and *v* coordinates to *x* and *y*
 coordinates.
 
-Now, if we have a vector *t* in *u* and *v* coordinates, we don't know how to
-apply the linear transformation to it. However we do know how to convert those
-coordinates into *x* and *y* coordinates, and we also know how to apply the
-linear transformation in *x* and *y* coordinates using matrix *A*.
+Now, if we have a vector *t* in *u* and *v* coordinates and we don't know how
+to apply the linear transformation to it, we can first convert *u* and *v*
+coordinates to *x* and *y* coordinates and then apply the linear operator by
+multipling by the matrix *A*.
+
+However that will give us a vector in *x* and *y* coordinates, but we need a
+vector in *u* and *v* coordinates. Well, no problem, we can just multiply it
+by the inverse of *S* to covert the vector back into the *u* and *v*
+coordinates.
 
 So in order to calculate the result of linear operator in *u* and *v*
 coordinates we can:
@@ -241,10 +258,8 @@ coordinates we can:
 3. convert the *x* and *y* coordinates to *u* and *v* coordinates using the
    inverse of *S*
 
-Alternatively putting all of that in a matrix form: \\(S A S^{-1} t\\). This
-gives us a method to find a matrix of a linear operator in any basis if we
-already know the matrix of the linear operator in some basis and how to
-convert between coordinates.
+Alternatively putting all of that in a matrix form: \\(S A S^{-1} t\\). So
+the matrix we need is \\(S A S^{-1}\\).
 
 # Diagonalization
 
@@ -268,3 +283,37 @@ $$
 A^n = (S B S^{-1})^n = S B S^{-1} S B S^{-1} \ldots S B S^{-1} = S B^n S^{-1}
 $$
 
+> *NOTE:* it should be noted that a basis that makes *B* diagonal may not
+  even exist. So we will try to find it, but no guarantees in general.
+
+To understand how to find a basis that makes *B* diagonal let's consider what
+the multiplication by diagonal *B* actually means. This multiplication will
+just scale each coordinate of the vector by a constant.
+
+Remember what coordinates of the vector in a basis mean? They mean how many
+basis vectors we need to take to construct the original vector from them. So
+if a linear operator matrix is diagonal in a basis, it means that the linear
+operator when applied to the vectors of this basis just multiplies them by a
+constant. In other words it makes them longer or shorter (it can also rotate
+them in the opposite direction, that what multiplication by a negative value
+means).
+
+So what we are looking for is a bunch of linearly independent vectors that
+when trasnformed by *A* just scale by a constant. We only care about
+non-trivial vectors that can constitute a basis, so the vector of length 0
+is not good.
+
+Putting it in a form of equation:
+
+$$
+  A x = \lambda x, \text{where} \lambda \ne 0
+$$
+
+Vectors that satisfy this equation are called eigenvectors and the values of
+\\(\lambda\\) are called eigenvalues.
+
+So if we find enough linearly independent eigenvectors, we can construct a
+basis in which matrix *B* representing the linear operator we care about is
+diagonal.
+
+# Finding eigenvectors

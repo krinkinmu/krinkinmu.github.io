@@ -120,7 +120,7 @@ $$
     F_{n} \\
     F_{n-1}
   \end{bmatrix} =
-  A^n
+  A^{n - 1}
   \begin{bmatrix}
     F_1 \\
     F_0
@@ -258,8 +258,11 @@ coordinates we can:
 3. convert the *x* and *y* coordinates to *u* and *v* coordinates using the
    inverse of *S*
 
-Alternatively putting all of that in a matrix form: \\(S A S^{-1} t\\). So
-the matrix we need is \\(S A S^{-1}\\).
+Alternatively putting all of that in a matrix form, if *A* is a matrix that
+represents the linear operator in the basis *x* and *y*, then to apply the
+same transformation to a vector *t* with coordinates in basis *u* and *v* we
+can do this \\(S A S^{-1} t\\). Therefore the matrix that represents our linear
+operator in the basis *u* and *v* is \\(S A S^{-1}\\).
 
 # Diagonalization
 
@@ -273,14 +276,14 @@ a matrix that is easy to multiply. Diagonal matrices seem to be rather easy to
 multiply.
 
 To formalize the problem we want to find a matrix *B* such that
-\\(A = S B S^{-1}\\) and *B* is diagonal. Here *S* is matrix that will convert
-from the whatever basis we started with to the basis where the same operator
-can be expressed by a diagonal matrix.
+\\(A = S B S^{-1}\\) and *B* is diagonal. Here *S* is matrix that converts the
+coordinates from the basis where the linear operator is expressed by matrix *B*
+to the basis where the same linear operator is expressed by matrix *A*.
 
-If we manage to do that, then it should be easy to get *A* to the nth power:
+If we manage to do that, then it should be easy to get *A* to the power:
 
 $$
-A^n = (S B S^{-1})^n = S B S^{-1} S B S^{-1} \ldots S B S^{-1} = S B^n S^{-1}
+A^{n-1} = (S B S^{-1})^{n-1} = S B S^{-1} S B S^{-1} \ldots S B S^{-1} = S B^{n-1} S^{-1}
 $$
 
 > *NOTE:* it should be noted that a basis that makes *B* diagonal may not
@@ -317,3 +320,297 @@ basis in which matrix *B* representing the linear operator we care about is
 diagonal.
 
 # Finding eigenvectors
+
+Now we need to solve the matrix equation, but it's not a usual matrix
+equation because we have a parameter \\(\lambda\\) value of which we don't
+know.
+
+Let's start from shuffling things around first:
+
+$$
+  A x = \lambda x \iff A x - \lambda x = 0
+$$
+
+Now we will do an interesting manipulation: we want to extract *x* in the left
+part, but *A* and \\(\lambda\\) are matrix and a scalar and we don't know how
+to substract a scalar from a matrix in general case.
+
+However in this case we have a trick: matrix equation can be viewed as a
+system of linear equations. In our case *A* is a two by two matrix, but the
+same principle works in general:
+
+$$
+  A x - \lambda x = 0 \iff
+  \begin{bmatrix}
+    a_{0,0} & a_{0,1} \\
+    a_{1,0} & a_{1,1}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix} -
+  \begin{bmatrix}
+    \lambda x_0 \\
+    \lambda x_1
+  \end{bmatrix} = 0 \iff
+  \begin{cases}
+    a_{0,0} x_0 + a_{0,1} x_1 - \lambda x_0 = 0 \\
+    a_{1,0} x_0 + a_{1,1} x_1 - \lambda x_1 = 0
+  \end{cases} \iff
+  \begin{cases}
+    (a_{0,0} - \lambda) x_0 + a_{0,1} x_1 = 0 \\
+    a_{1,0} x_0 + (a_{1,1} - \lambda) x_1 = 0
+  \end{cases} \iff
+  \begin{bmatrix}
+    a_{0,0} - \lambda & a_{0,1} \\
+    a_{1,0} & a_{1,1} - \lambda
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix} = 0 \iff
+  (A - \lambda \textbb{I}) x = 0
+$$
+
+Here we use \\(\textbb{I}\\) to denote a unit matrix - matrix that has ones on
+the main diagonal and zeros everywhere else.
+
+Now we have a regular matrix equation with a parameter \\(\lambda\\). Stepping
+back for a second, our goal is to find enough eigenvectors to create a basis.
+The matrix equation above has non-trivial solutions if and only if the
+determinat of the matrxi \\(A - \lambda \textbb{I})\\) is zero. So probably
+we should find such lambdas that make the determinant zero if we want to find
+non-trivial solutions to the equation.
+
+In general the determinat of the two by two matrix can be calculated as follows:
+
+$$
+  \begin{vmatrix}
+  a_{0,0} & a_{0,1} \\
+  a_{1,0} & a_{1,1}
+  \end{vmatrix} = a_{0,0} a_{1,1} - a_{0,1} a_{1,0}
+$$
+
+In case of our specific matrix we have:
+
+$$
+  \begin{vmatrix}
+    1 - \lambda & 1 \\
+    1 & -\lambda
+  \end{vmatrix} = -\lambda (1 - \lambda) - 1 = \lambda^2 - \lambda - 1
+$$
+
+What is left is to solve the quadratic equation to find possible values for
+\\(\lambda\\):
+
+$$
+  \lambda_{0,1} = {1 \pm \sqrt{5}\over 2}
+$$
+
+For convenience we will denote the solutions as follows (it's a common notation
+for golden ratio and golden ratio conjugate):
+
+$$
+  \begin{cases}
+    \varphi = {1 + \sqrt{5} \over 2} \\
+    \bar \varphi = {1 - \sqrt{5} \over 2}
+  \end{cases}
+$$
+
+So now we know two possible values of \\(\lambda\\), so what remains to be done
+is to solve the matrix equation for each value of \\(\lambda\\). Let's do
+that:
+
+$$
+  \begin{bmatrix}
+  1 - \varphi & 1 \\
+  1 & -\varphi
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_0 \\
+  x_1
+  \end{bmatrix} = 0 \iff
+  \begin{cases}
+    (1 - \varphi) x_0 + x_1 = 0 \\
+    x_0 - \varphi x_1 = 0
+  \end{cases} \iff
+  \begin{cases}
+    (1 - \varphi) x_0 + x_1 = 0 \\
+    x_0 = \varphi x_1 
+  \end{cases} \iff
+  \begin{cases}
+    (1 - \varphi) \varphi x_1 + x_1 = 0 \\
+    x_0 = \varphi x_1 
+  \end{cases} \iff
+  \begin{cases}
+    (-\varphi^2 + \varphi + 1) x_1 = 0 \\
+    x_0 = \varphi x_1 
+  \end{cases} \iff
+$$
+
+We have an interesting situation. You see \\(\varphi\\) is a root of
+\\(\lambda^2 - \lambda + 1 = 0\\) - that's how we found it in the first place.
+Therefore it's also a root of \\(-\lambda^2 + \lambda - 1 = 0\\), so necessarily
+\\(-\varphi^2 + \varphi + 1 = 0\\). That basically means that \\(x_1\\) can be
+literaly anything.
+
+We are free to pick whatever value we need. Remeber that the vectors that we
+need must not be zero vectors, so it makes sense to pick a non-zero value for
+\\(x_1\\). Let's pick a number that would be easy to work with, so here is our
+first eignevector and also our first basis vector:
+
+$$
+  x_0 =
+  \begin{bmatrix}
+    \varphi \\
+    1
+  \end{bmatrix}
+$$
+
+Repeating the same process with the \\(\bar \varphi\\) will give us a similar
+result:
+
+$$
+  x_1 =
+  \begin{bmatrix}
+    \bar \varphi \\
+    1
+  \end{bmatrix}
+$$
+
+# Putting it all together
+
+We picked a basis that is convenient and makes the matrix *B* of our linear
+operator diagonal. It's not suprising that on the diagonal the matrix will
+have eigenvalues (you may want to actually verify it, but since that's how we
+were looking for the eigenvalues and eigenvectors in the first place I will
+skip it):
+
+$$
+  B =
+  \begin{bmatrix}
+    \varphi & 0 \\
+    0 & \bar \varphi
+  \end{bmatrix}
+$$
+
+The matrix that converts from the basis we found in the previous section to our
+original basis (we called it *S* in the formal problem statement above) is:
+
+$$
+  S =
+  \begin{bmatrix}
+    \varphi & \bar \varphi \\
+    1 & 1
+  \end{bmatrix}
+$$
+
+I will not show how to find the inverse of *S*, but you can verify that the
+following matrix is indeed the inverse of *S*:
+
+$$
+  S^{-1} =
+  \begin{bmatrix}
+    {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
+    {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
+  \end{bmatrix}
+$$
+
+Putting it all together:
+
+$$
+  A^n = S B^{n-1} S^{-1} =
+  \begin{bmatrix}
+    \varphi & \bar \varphi \\
+    1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    \varphi & 0 \\
+    0 & \bar \varphi
+  \end{bmatrix}^{n-1}
+  \begin{bmatrix}
+    {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
+    {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    \varphi & \bar \varphi \\
+    1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    \varphi^{n-1} & 0 \\
+    0 & {\bar \varphi}^{n-1}
+  \end{bmatrix}
+  \begin{bmatrix}
+    {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
+    {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
+  \end{bmatrix} =
+  {1\over \varphi - \bar \varphi}
+  \begin{bmatrix}
+    \varphi & \bar \varphi \\
+    1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    \varphi^{n-1} & 0 \\
+    0 & {\bar \varphi}^{n-1}
+  \end{bmatrix}
+  \begin{bmatrix}
+    1 & - \bar \varphi \\
+    -1 & \varphi
+  \end{bmatrix}
+$$
+
+Now we need to multiply all those matrices. It looks hard, but we only need to
+do it once:
+
+$$
+  {1\over \varphi - \bar \varphi}
+  \begin{bmatrix}
+    \varphi & \bar \varphi \\
+    1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    \varphi^{n-1} & 0 \\
+    0 & {\bar \varphi}^{n-1}
+  \end{bmatrix}
+  \begin{bmatrix}
+    1 & - \bar \varphi \\
+    -1 & \varphi
+  \end{bmatrix} =
+  {1\over \varphi - \bar \varphi}
+  \begin{bmatrix}
+    \varphi & \bar \varphi \\
+    1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    \varphi^{n-1} & - \bar \varphi \varphi^{n-1} \\
+    - {\bar \varphi}^{n-1} & \varphi {\bar \varphi}^{n-1}
+  \end{bmatrix} =
+  {1\over \varphi - \bar \varphi}
+  \begin{bmatrix}
+    \varphi^n - {\bar \varphi}^n & - \varphi \bar \varphi ({\bar \varphi}^{n-1} - \varphi^{n-1}) \\
+    \varphi^{n-1} - {\bar \varphi}^{n-1} & \varphi {\bar \varphi}^{n-1} - \bar \varphi \varphi^{n-1}
+  \end{bmatrix}
+$$
+
+Fortunately we can stop here, as what we want to do in the end to calculate
+\((F_n\)) is to multiply this monstrosity of a mamtrix by a rather simple
+vector:
+
+$$
+  \begin{bmatrix}
+    F_1 \\
+    F_0
+  \end{bmatrix} =
+  \begin{bmatrix}
+    1 \\
+    0
+  \end{bmatrix}
+$$
+
+Moreover we only need to take the first element of the result, which gives us a
+rather simple expression:
+
+$$
+  F_n = {\varphi^n - {\bar \varphi}^n \over \varphi - \bar \varphi} =
+  {1\over\sqrt{5}}({1+\sqrt{5}\over 2})^n - {1\over\sqrt{5}}({1-\sqrt{5}\over 2})^n
+$$

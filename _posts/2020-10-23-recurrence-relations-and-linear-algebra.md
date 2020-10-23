@@ -367,36 +367,38 @@ system of linear equations. In our case *A* is a two by two matrix, but the
 same principle works in general:
 
 $$
-  A x - \lambda x = 0 \iff
-  \begin{bmatrix}
-    a_{0,0} & a_{0,1} \\
-    a_{1,0} & a_{1,1}
-  \end{bmatrix}
-  \begin{bmatrix}
-    x_0 \\
-    x_1
-  \end{bmatrix} -
-  \begin{bmatrix}
-    \lambda x_0 \\
-    \lambda x_1
-  \end{bmatrix} = 0 \iff
-  \begin{cases}
-    a_{0,0} x_0 + a_{0,1} x_1 - \lambda x_0 = 0 \\
-    a_{1,0} x_0 + a_{1,1} x_1 - \lambda x_1 = 0
-  \end{cases} \iff
-  \begin{cases}
-    (a_{0,0} - \lambda) x_0 + a_{0,1} x_1 = 0 \\
-    a_{1,0} x_0 + (a_{1,1} - \lambda) x_1 = 0
-  \end{cases} \iff \\
-  \begin{bmatrix}
-    a_{0,0} - \lambda & a_{0,1} \\
-    a_{1,0} & a_{1,1} - \lambda
-  \end{bmatrix}
-  \begin{bmatrix}
-    x_0 \\
-    x_1
-  \end{bmatrix} = 0 \iff
-  (A - \lambda \mathbb{I}) x = 0
+  \displaylines{
+    A x - \lambda x = 0 \iff
+    \begin{bmatrix}
+      a_{0,0} & a_{0,1} \\
+      a_{1,0} & a_{1,1}
+    \end{bmatrix}
+    \begin{bmatrix}
+      x_0 \\
+      x_1
+    \end{bmatrix} -
+    \begin{bmatrix}
+      \lambda x_0 \\
+      \lambda x_1
+    \end{bmatrix} = 0 \iff
+    \begin{cases}
+      a_{0,0} x_0 + a_{0,1} x_1 - \lambda x_0 = 0 \\
+      a_{1,0} x_0 + a_{1,1} x_1 - \lambda x_1 = 0
+    \end{cases} \iff
+    \begin{cases}
+      (a_{0,0} - \lambda) x_0 + a_{0,1} x_1 = 0 \\
+      a_{1,0} x_0 + (a_{1,1} - \lambda) x_1 = 0
+    \end{cases} \iff \\
+    \begin{bmatrix}
+      a_{0,0} - \lambda & a_{0,1} \\
+      a_{1,0} & a_{1,1} - \lambda
+    \end{bmatrix}
+    \begin{bmatrix}
+      x_0 \\
+      x_1
+    \end{bmatrix} = 0 \iff
+    (A - \lambda \mathbb{I}) x = 0
+  }
 $$
 
 Here we use \\(\mathbb{I}\\) to denote a unit matrix - matrix that has ones on
@@ -449,30 +451,32 @@ is to solve the matrix equation for each value of \\(\lambda\\). Let's do
 that:
 
 $$
-  \begin{bmatrix}
-  1 - \varphi & 1 \\
-  1 & -\varphi
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_0 \\
-  x_1
-  \end{bmatrix} = 0 \iff
-  \begin{cases}
-    (1 - \varphi) x_0 + x_1 = 0 \\
-    x_0 - \varphi x_1 = 0
-  \end{cases} \iff
-  \begin{cases}
-    (1 - \varphi) x_0 + x_1 = 0 \\
-    x_0 = \varphi x_1 
-  \end{cases} \iff
-  \begin{cases}
-    (1 - \varphi) \varphi x_1 + x_1 = 0 \\
-    x_0 = \varphi x_1 
-  \end{cases} \iff \\
-  \begin{cases}
-    (-\varphi^2 + \varphi + 1) x_1 = 0 \\
-    x_0 = \varphi x_1 
-  \end{cases}
+  \displaylines{
+    \begin{bmatrix}
+    1 - \varphi & 1 \\
+    1 & -\varphi
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_0 \\
+    x_1
+    \end{bmatrix} = 0 \iff
+    \begin{cases}
+      (1 - \varphi) x_0 + x_1 = 0 \\
+      x_0 - \varphi x_1 = 0
+    \end{cases} \iff
+    \begin{cases}
+      (1 - \varphi) x_0 + x_1 = 0 \\
+      x_0 = \varphi x_1 
+    \end{cases} \iff
+    \begin{cases}
+      (1 - \varphi) \varphi x_1 + x_1 = 0 \\
+      x_0 = \varphi x_1 
+    \end{cases} \iff \\
+    \begin{cases}
+      (-\varphi^2 + \varphi + 1) x_1 = 0 \\
+      x_0 = \varphi x_1 
+    \end{cases}
+  }
 $$
 
 We have an interesting situation. You see \\(\varphi\\) is a root of
@@ -546,77 +550,81 @@ $$
 Putting it all together:
 
 $$
-  A^n = S B^{n-1} S^{-1} =
-  \begin{bmatrix}
-    \varphi & \bar \varphi \\
-    1 & 1
-  \end{bmatrix}
-  \begin{bmatrix}
-    \varphi & 0 \\
-    0 & \bar \varphi
-  \end{bmatrix}^{n-1}
-  \begin{bmatrix}
-    {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
-    {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
-  \end{bmatrix} = 
-  \begin{bmatrix}
-    \varphi & \bar \varphi \\
-    1 & 1
-  \end{bmatrix}
-  \begin{bmatrix}
-    \varphi^{n-1} & 0 \\
-    0 & {\bar \varphi}^{n-1}
-  \end{bmatrix}
-  \begin{bmatrix}
-    {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
-    {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
-  \end{bmatrix} = \\
-  {1\over \varphi - \bar \varphi}
-  \begin{bmatrix}
-    \varphi & \bar \varphi \\
-    1 & 1
-  \end{bmatrix}
-  \begin{bmatrix}
-    \varphi^{n-1} & 0 \\
-    0 & {\bar \varphi}^{n-1}
-  \end{bmatrix}
-  \begin{bmatrix}
-    1 & - \bar \varphi \\
-    -1 & \varphi
-  \end{bmatrix}
+  \displaylines{
+    A^n = S B^{n-1} S^{-1} =
+    \begin{bmatrix}
+      \varphi & \bar \varphi \\
+      1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      \varphi & 0 \\
+      0 & \bar \varphi
+    \end{bmatrix}^{n-1}
+    \begin{bmatrix}
+      {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
+      {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
+    \end{bmatrix} = 
+    \begin{bmatrix}
+      \varphi & \bar \varphi \\
+      1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      \varphi^{n-1} & 0 \\
+      0 & {\bar \varphi}^{n-1}
+    \end{bmatrix}
+    \begin{bmatrix}
+      {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
+      {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
+    \end{bmatrix} = \\
+    {1\over \varphi - \bar \varphi}
+    \begin{bmatrix}
+      \varphi & \bar \varphi \\
+      1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      \varphi^{n-1} & 0 \\
+      0 & {\bar \varphi}^{n-1}
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 & - \bar \varphi \\
+      -1 & \varphi
+    \end{bmatrix}
+  }
 $$
 
 Now we need to multiply all those matrices. It looks hard, but we only need to
 do it once:
 
 $$
-  {1\over \varphi - \bar \varphi}
-  \begin{bmatrix}
-    \varphi & \bar \varphi \\
-    1 & 1
-  \end{bmatrix}
-  \begin{bmatrix}
-    \varphi^{n-1} & 0 \\
-    0 & {\bar \varphi}^{n-1}
-  \end{bmatrix}
-  \begin{bmatrix}
-    1 & - \bar \varphi \\
-    -1 & \varphi
-  \end{bmatrix} =
-  {1\over \varphi - \bar \varphi}
-  \begin{bmatrix}
-    \varphi & \bar \varphi \\
-    1 & 1
-  \end{bmatrix}
-  \begin{bmatrix}
-    \varphi^{n-1} & - \bar \varphi \varphi^{n-1} \\
-    - {\bar \varphi}^{n-1} & \varphi {\bar \varphi}^{n-1}
-  \end{bmatrix} = \\
-  {1\over \varphi - \bar \varphi}
-  \begin{bmatrix}
-    \varphi^n - {\bar \varphi}^n & - \varphi \bar \varphi ({\bar \varphi}^{n-1} - \varphi^{n-1}) \\
-    \varphi^{n-1} - {\bar \varphi}^{n-1} & \varphi {\bar \varphi}^{n-1} - \bar \varphi \varphi^{n-1}
-  \end{bmatrix}
+  \displaylines{
+    {1\over \varphi - \bar \varphi}
+    \begin{bmatrix}
+      \varphi & \bar \varphi \\
+      1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      \varphi^{n-1} & 0 \\
+      0 & {\bar \varphi}^{n-1}
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 & - \bar \varphi \\
+      -1 & \varphi
+    \end{bmatrix} =
+    {1\over \varphi - \bar \varphi}
+    \begin{bmatrix}
+      \varphi & \bar \varphi \\
+      1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      \varphi^{n-1} & - \bar \varphi \varphi^{n-1} \\
+      - {\bar \varphi}^{n-1} & \varphi {\bar \varphi}^{n-1}
+    \end{bmatrix} = \\
+    {1\over \varphi - \bar \varphi}
+    \begin{bmatrix}
+      \varphi^n - {\bar \varphi}^n & - \varphi \bar \varphi ({\bar \varphi}^{n-1} - \varphi^{n-1}) \\
+      \varphi^{n-1} - {\bar \varphi}^{n-1} & \varphi {\bar \varphi}^{n-1} - \bar \varphi \varphi^{n-1}
+    \end{bmatrix}
+  }
 $$
 
 Fortunately we can stop here, as what we want to do in the end to calculate

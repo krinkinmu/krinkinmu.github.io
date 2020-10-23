@@ -387,7 +387,7 @@ $$
   \begin{cases}
     (a_{0,0} - \lambda) x_0 + a_{0,1} x_1 = 0 \\
     a_{1,0} x_0 + (a_{1,1} - \lambda) x_1 = 0
-  \end{cases} \iff
+  \end{cases} \iff \\
   \begin{bmatrix}
     a_{0,0} - \lambda & a_{0,1} \\
     a_{1,0} & a_{1,1} - \lambda
@@ -396,16 +396,16 @@ $$
     x_0 \\
     x_1
   \end{bmatrix} = 0 \iff
-  (A - \lambda \textbb{I}) x = 0
+  (A - \lambda \mathbb{I}) x = 0
 $$
 
-Here we use \\(\textbb{I}\\) to denote a unit matrix - matrix that has ones on
+Here we use \\(\mathbb{I}\\) to denote a unit matrix - matrix that has ones on
 the main diagonal and zeros everywhere else.
 
 Now we have a regular matrix equation with a parameter \\(\lambda\\). Stepping
 back for a second, our goal is to find enough eigenvectors to create a basis.
 The matrix equation above has non-trivial solutions if and only if the
-determinat of the matrxi \\(A - \lambda \textbb{I})\\) is zero. So probably
+determinat of the matrxi \\(A - \lambda \mathbb{I})\\) is zero. So probably
 we should find such lambdas that make the determinant zero if we want to find
 non-trivial solutions to the equation.
 
@@ -468,11 +468,11 @@ $$
   \begin{cases}
     (1 - \varphi) \varphi x_1 + x_1 = 0 \\
     x_0 = \varphi x_1 
-  \end{cases} \iff
+  \end{cases} \iff \\
   \begin{cases}
     (-\varphi^2 + \varphi + 1) x_1 = 0 \\
     x_0 = \varphi x_1 
-  \end{cases} \iff
+  \end{cases}
 $$
 
 We have an interesting situation. You see \\(\varphi\\) is a root of
@@ -570,7 +570,7 @@ $$
   \begin{bmatrix}
     {1\over \varphi - \bar \varphi} & {- \bar \varphi \over \varphi - \bar \varphi} \\
     {-1\over \varphi - \bar \varphi} & {\varphi \over \varphi - \bar \varphi}
-  \end{bmatrix} =
+  \end{bmatrix} = \\
   {1\over \varphi - \bar \varphi}
   \begin{bmatrix}
     \varphi & \bar \varphi \\
@@ -611,7 +611,7 @@ $$
   \begin{bmatrix}
     \varphi^{n-1} & - \bar \varphi \varphi^{n-1} \\
     - {\bar \varphi}^{n-1} & \varphi {\bar \varphi}^{n-1}
-  \end{bmatrix} =
+  \end{bmatrix} = \\
   {1\over \varphi - \bar \varphi}
   \begin{bmatrix}
     \varphi^n - {\bar \varphi}^n & - \varphi \bar \varphi ({\bar \varphi}^{n-1} - \varphi^{n-1}) \\

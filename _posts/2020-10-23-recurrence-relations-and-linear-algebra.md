@@ -125,7 +125,7 @@ $$
     F_1 \\
     F_0
   \end{bmatrix} =
-  A^n
+  A^{n-1}
   \begin{bmatrix}
     1 \\
     0
@@ -167,28 +167,55 @@ may have multiple different basises.
 For example, let's say we have a vector *t* on a plane (\\(\mathbb{R}^2\\))
 and we use *x* and *y* coordinates to describe the vector on that plane.
 
-TODO insert a picture here
+![X and Y coordinates](/assets/xy.png)
 
 Basically *x* and *y* coordinates tell us how many basis vectors we need to
-combine to get the original vector *t*. 
+combine to get the original vector *t*. On the picture above we need to take
+the vector *x* two time and the vector *y* three times, so the coordinates of
+the vector *t* in the basis consisting of vectors *x* and *y* are two and three:
+
+$$
+  t =
+  \begin{bmatrix}
+    2 \\
+    3
+  \end{bmatrix}
+$$
 
 The pair of basis vectors chosen above is convinient to use, but that's by no
 means the only pair of vectors that could be used for this purpose. For
-example, these two vector will work as well:
+example, the two vectors *u* and *v* on this picture will work as well:
 
-TODO insert a picture here
+![U and V coordinates](/assets/uv.png)
 
 We can use those vectors as a basis as well. However the coordinates of the
-vector *t* will be different if we use them as a vector.
+vector *t* will be different if we use them as a vector. In case of the basis
+consisting of vectors *u* and *v* the coordinates of the same vector *t* will
+be minus two and minus three:
 
-In this particular case all we need to change the basis is to change the
-signes of the *x* and *y* coordinates to the opposite, but in general the
-transformation might be more complicated.
+$$
+  t =
+  \begin{bmatrix}
+    -2 \\
+    -3
+  \end{bmatrix}
+$$
 
-So we can have different basises for the same vector space, so what? Well, the
-matrix of the same linear operator might look differently in different basises.
-What if we can find such a basis that makes the matrix of the linear operator
-more convenient to work with?
+> *NOTE:* you can see how it can get confusing, the same vector *t* in matrix
+  notation can look completely differently depending on the basis we are working
+  with. You might think that a good notation should specify the basis we are
+  working with somehow, but in practice we often don't care what the basis we
+  are using exactly.
+
+In this particular case if we want to switch from one basis to another all we
+need to do is to change the signes of coordinates to the opposite, but in
+general the transformation might be more complicated.
+
+So we can have different basises for the same vector space, so what? Well, as
+vector coordinates look differently in different basis the matrices of linear
+operators might look differently in different basises. What if we can find such
+a basis that makes the matrix of the linear operator more convenient to work
+with?
 
 # Basis changes
 
@@ -205,8 +232,8 @@ In practice that means that we can find a matrix *S*, that given coordinates of
 a vector in one basis transforms them into coordinates of the same vector in
 another basis.
 
-Let's say that the original basis consits of vector *x* and *y* and the target
-basis consists of vector *u* and *v*. We know that vectors *x* and *y* can
+Let's say that the original basis consits of vectors *x* and *y* and the target
+basis consists of vectors *u* and *v*. We know that vectors *x* and *y* can
 be expressed as a linear combination of vectors *u* and *v*.
 
 Without loss of generality lets say that  \\(x = s_{0,0} u + s_{1,0} v\\) and

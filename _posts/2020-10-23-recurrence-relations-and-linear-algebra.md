@@ -647,7 +647,8 @@ rather simple expression:
 
 $$
   F_n = {\varphi^n - {\bar \varphi}^n \over \varphi - \bar \varphi} =
-  {1\over\sqrt{5}}({1+\sqrt{5}\over 2})^n - {1\over\sqrt{5}}({1-\sqrt{5}\over 2})^n
+  {1\over\sqrt{5}}\left({1+\sqrt{5}\over 2}\right)^n -
+  {1\over\sqrt{5}}\left({1-\sqrt{5}\over 2}\right)^n
 $$
 
 # Instead of conclusion

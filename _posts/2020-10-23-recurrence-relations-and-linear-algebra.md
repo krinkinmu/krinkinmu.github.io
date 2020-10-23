@@ -628,7 +628,7 @@ $$
 $$
 
 Fortunately we can stop here, as what we want to do in the end to calculate
-\((F_n\)) is to multiply this monstrosity of a mamtrix by a rather simple
+\\(F_n\\) is to multiply this monstrosity of a mamtrix by a rather simple
 vector:
 
 $$

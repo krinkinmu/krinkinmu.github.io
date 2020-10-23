@@ -614,3 +614,9 @@ $$
   F_n = {\varphi^n - {\bar \varphi}^n \over \varphi - \bar \varphi} =
   {1\over\sqrt{5}}({1+\sqrt{5}\over 2})^n - {1\over\sqrt{5}}({1-\sqrt{5}\over 2})^n
 $$
+
+# Instead of conclusion
+
+Hopefully it was a rather simple to understand example that ties together
+various parts of basic linear algebra. Of course, I skipped all the interesting
+stuff like proofs, but I tried to make it as intuitive as possible.

@@ -151,7 +151,8 @@ $ cargo new --lib --vcs=none --edition=2018 pl011
 I also had to modify a little bit `Cargo.toml` files for each module to specify
 dependencies and adjust a little bit crate types:
 
-* `runtime/Cargo.toml`
+* `runtime/Cargo.toml`:
+
 ```
 [package]
 name = "runtime"
@@ -164,7 +165,8 @@ name = "runtime"
 crate-type = ["rlib"]
 ```
 
-* `pl011/Cargo.toml`
+* `pl011/Cargo.toml`:
+
 ```
 [package]
 name = "pl011"
@@ -177,7 +179,8 @@ name = "pl011"
 crate-type = ["rlib"]
 ```
 
-* `start/Cargo.toml`
+* `start/Cargo.toml`:
+
 ```
 [package]
 name = "start"

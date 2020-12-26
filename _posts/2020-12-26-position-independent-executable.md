@@ -5,7 +5,7 @@ excerpt_separator: <!--more-->
 tags: clang aarch64 qemu rust gdb ld assembly format!
 ---
 
-[previous post]: {% post_url 2020-12-13-adding-rust-to-aarch64.md %} "the previous post"
+[previous post]: {% post_url 2020-12-13-adding-rust-to-aarch64 %} "the previous post"
 
 In the [previous post] I added Rust to the project and since then I was
 experimenting with parsing DeviceTree, however while doing that I stumbled

@@ -838,8 +838,8 @@ So every time when the exception happens, we will output the content of the
 `InterruptFrame` structure via a serial port and hang in an infinite loop.
 
 > *NOTE:* the serial port code has been covered in posts
-  [1]{% post_url 2020-11-29-PL011 %}, [2]{% post_url 2020-12-05-HiKey960 %}
-  and [3]{% post_url 2020-12-13-adding-rust-to-aarch64 %}.
+  [1]({% post_url 2020-11-29-PL011 %}), [2]({% post_url 2020-12-05-HiKey960 %})
+  and [3]({% post_url 2020-12-13-adding-rust-to-aarch64 %}).
 
 > *NOTE:* this way of communicating with hardware is somewhat unsafe in
   general. Consider the case where we have concurrently executing code that
@@ -889,7 +889,7 @@ You can see the content of the `InterruptFrame` structure that was saved by
 the `exception_entry` and passed to the `exception` function as an argument.
 
 Another way we can look is by using the QEMU monitor. You can read
-[this post]{% post_url 2020-12-26-position-independent-executable %} that
+[this post]({% post_url 2020-12-26-position-independent-executable %}) that
 covers some debugging tools includeing QEMU monitor.
 
 Assuming that you know how to connect to the QEMU monitor, you can use the

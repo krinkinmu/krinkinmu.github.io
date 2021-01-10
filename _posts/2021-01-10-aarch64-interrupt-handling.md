@@ -419,7 +419,6 @@ vector_table:
     b .
 .balign 0x80
     b .
-
 ...
 ```
 
@@ -535,7 +534,7 @@ To actually store information on stack I will use the `stp` instruction
 the address pointer by the third argument.
 
 To restore the values from stack I will use the `ldp` instruction (load
-store). That instruction is basically the opposite of the `stp` instruction.
+pair). That instruction is basically the opposite of the `stp` instruction.
 
 Let's take a look:
 
@@ -834,7 +833,8 @@ So every time when the exception happens, we will output the content of the
 `InterruptFrame` structure via a serial port and hang in an infinite loop.
 
 > *NOTE:* the serial port code has been covered in posts
-  [1]({% post_url 2020-11-29-PL011 %}), [2]({% post_url 2020-12-05-HiKey960 %})
+  [1]({% post_url 2020-11-29-PL011 %}),
+  [2]({% post_url 2020-12-05-PL011-HiKey960 %})
   and [3]({% post_url 2020-12-13-adding-rust-to-aarch64 %}).
 
 > *NOTE:* this way of communicating with hardware is somewhat unsafe in

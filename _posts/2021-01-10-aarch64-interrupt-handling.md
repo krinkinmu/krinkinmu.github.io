@@ -382,22 +382,18 @@ The complete exception vector table looks like this:
 | 0x080               | IRQ                   | EL is using `SP_EL0` stack |
 | 0x100               | FIQ                   | EL is using `SP_EL0` stack |
 | 0x180               | SError                | EL is using `SP_EL0` stack |
-|---------------------|-----------------------|----------------------------|
 | 0x200               | Synchronous Exception | EL is using `SP_ELx` stack |
 | 0x280               | IRQ                   | EL is using `SP_ELx` stack |
 | 0x300               | FIQ                   | EL is using `SP_ELx` stack |
 | 0x380               | SError                | EL is using `SP_ELx` stack |
-|---------------------|-----------------------|----------------------------|
 | 0x400               | Synchronous Exception | From lower EL in AArch64   |
 | 0x480               | IRQ                   | From lower EL in AArch64   |
 | 0x500               | FIQ                   | From lower EL in AArch64   |
 | 0x580               | SError                | From lower EL in AArch64   |
-|---------------------|-----------------------|----------------------------|
 | 0x600               | Synchronous Exception | From lower EL in AArch32   |
 | 0x680               | IRQ                   | From lower EL in AArch32   |
 | 0x700               | FIQ                   | From lower EL in AArch32   |
 | 0x780               | SError                | From lower EL in AArch32   |
-|---------------------|-----------------------|----------------------------|
 
 The first column contains the offset of the table entry from the beginning of
 the exception vector table in bytes. The second column contains the type of

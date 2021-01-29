@@ -486,15 +486,15 @@ moving problem to runtime.
 
 The reason for this is still a mistery for me, but from googling around I got
 that it has more to do with the linking rather than with some fundamental
-property of the Rust language. You can read more by looking at [this comment]
-(https://internals.rust-lang.org/t/how-about-generic-global-variables/8351/8).
+property of the Rust language. You can read more by looking at
+[this comment](https://internals.rust-lang.org/t/how-about-generic-global-variables/8351/8).
 
 Unfortunately I don't know enough about Rust dylibs, so it's hard to
 understand why instantiation of such generics is a problem for dylibs.
 
 BTW, if you got scared by "monomorphisation" don't be. Behind the scary word
-there is an easy to understand concept. Just take a look at [static dispatch]
-(https://en.wikipedia.org/wiki/Static_dispatch).
+there is an easy to understand concept. Just take a look at
+[static dispatch](https://en.wikipedia.org/wiki/Static_dispatch).
 
 This leaves us with the Rust macroses as the last resort. However I didn't
 go that way and left the code as it's without trying to further generalize

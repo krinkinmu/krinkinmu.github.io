@@ -1,6 +1,7 @@
 theme: jekyll-theme-hacker
 title: "Welcome to the Mike's homepage!"
 description: "Various things I do outside of work: fun, boring, anything really."
+url: "https://krinkinmu.github.io"
 
 google_analytics: "UA-180870978-1"
 
@@ -9,3 +10,6 @@ author:
   location: "Dublin, Ireland"
   email: "krinkin.m.u@gmail.com"
   github: "krinkinmu"
+
+plugins:
+  - jekyll-sitemap

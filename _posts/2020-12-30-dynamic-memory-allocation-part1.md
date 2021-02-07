@@ -2,7 +2,7 @@
 layout: post
 title: Dynamic Memory Allocation Part1
 excerpt_separator: <!--more-->
-tags: algorithms dynamic_memory_allocation
+tags: algorithms dynamic-memory-allocation
 ---
 
 [previous post]: {% post_url 2020-12-26-position-independent-executable %} "the previous post"

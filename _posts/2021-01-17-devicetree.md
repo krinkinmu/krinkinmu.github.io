@@ -50,7 +50,7 @@ memory.
 
 When the simplest method doesn't work, in the PC world the problem can be
 addressed via BIOS, UEFI, ACPI or a combination of those. They provide various
-interfaces to explore the availble memory and basic hardware.
+interfaces to explore the available memory and basic hardware.
 
 However hardware platforms in the PC world are more or less standartized. In
 the embedded systems worlds there is a bit more variety and there an

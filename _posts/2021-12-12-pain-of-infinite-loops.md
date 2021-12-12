@@ -88,11 +88,11 @@ extern "C" void kernel() {
 > `extern "C"` to avoid C++ name mangling.
 
 In this example, the `kernel` function does nothing, it's just expected to hang
-right away in the `Panic` call. To surprise however, it actually didn't do what
-i wanted it to do.
+right away in the `Panic` call. To my surprise however, it actually didn't do
+what I wanted it to do (I didn't even ask that much from it...).
 
-When I looked at the generated assembler code with `llvm-objdump -D` at the code
-of the `kernel` function it looked like this:
+When I looked at the generated assembler code of the `kernel` function with
+`llvm-objdump -D` it looked like this:
 
 ```
 00000000000020c8 <kernel>:
@@ -124,9 +124,10 @@ is a branch instruction commonly used in ARM to call functions and
 `_ZN12_GLOBAL__N_15PanicEv` is the mangled name of our `Panic` function.
 
 So without optimizations the `kernel` function does some stack manipuations (
-`sp` is a stack pointer register) and then calls the `Panic` function.
+`sp` is a stack pointer register) and then calls the `Panic` function - that's
+pretty much what I'd expect to see there.
 
-For completeness less look at the `Panic` function itself:
+For completeness let's look at the `Panic` function itself:
 
 ```
 000000000000215c <_ZN12_GLOBAL__N_15PanicEv>:
@@ -134,20 +135,21 @@ For completeness less look at the `Panic` function itself:
 ```
 
 The function contains just one instruction - `b`. `b` is an unconditional jump
-in ARM and in this case it jumps to the instruction itself, so it's an infinite
-loop - pretty much as you expect.
+in ARM and in this case it jumps to the instruction itself (pay attention to
+the instruction address on the left side), so it's an infinite loop - pretty
+much what I wanted.
 
 > *NOTE:* without explicitly enabled optimizations I would expect that compiler
 > would put a `ret` instruction at the end, but it did realize that there is no
 > escape from the inifinite loop and removed all the dead code after the loop.
 
 When I saw that my code behaves differently with and without optimizations I
-knew a screwed up somewhere, but where?
+knew I screwed up somewhere, but where?
 
 In the example I've shown the code pretty much does nothing, so where could the
 problem be?
 
-# Infinite loops are the problem
+# Infinite loops shall not pass
 
 The problem is the inifnite loop itself. Turnes out many-many years ago in a
 glaxy far-far away, standardization committee decided that loops have to
@@ -169,8 +171,9 @@ What does observable behavior mean? It's technical, but it's easy to understand:
 * synchronization and atomic operations are observable as well.
 
 As you can see our initial implementation had no operations that can be
-considered observable. So in our case the compiler was allowed to assume that
-the loop will terminate.
+considered observable in the loop itself (operations outside the loop don't
+matter). So in our case the compiler was allowed to assume that the loop will
+terminate.
 
 It's not a bit leap from that to understand why compiler dropped the loop all
 together. If the loop doesn't have any visible effects and we know that it will
@@ -218,14 +221,17 @@ to comment on that. However the argument that C++ standard at the time allowed
 it anyways (or didn't specify it well enough to disallow such "optimization") is
 just bad. Hanging in an infinite loop is a pretty noticeable side affect that
 does in fact affects observable behavior of the prgram, doesn't matter how you
-look at it.
+look at it. Think about operations that come after the loop. Those operations
+may have observable behavior and, if the loop is infinite, we should not see the
+effects of those operations.
 
 I'm genuenly having a very hard time beliving that
 [Hans Boehm](https://hboehm.info/) didn't realize that this part of the argument
 was not particularly sound. And, I think, I'm not the only one and that's how
 N1509 came to be in the first place. So why?
 
-Hans actually wrote a response to N1509: [N1528](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1528.htm).
+Hans actually wrote a response to N1509:
+[N1528](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1528.htm).
 The response argues three points:
 
 * consistency between C and C++

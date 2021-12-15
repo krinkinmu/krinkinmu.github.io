@@ -115,7 +115,7 @@ OS kernel has been initialized it may want to start the first userspace process
 of the OS that will run in a non-privledged EL0 level. So naturally we need to
 know how to do that.
 
-ARM specificatio is pretty clear that there are only two ways to change the
+ARM specification is pretty clear that there are only two ways to change the
 EL:
 
   * take an exception/interrupt - this may switch CPU from a lower EL to a

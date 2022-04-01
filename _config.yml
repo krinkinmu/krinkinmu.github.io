@@ -13,3 +13,4 @@ author:
 
 plugins:
   - jekyll-sitemap
+  - jekyll-feed

@@ -43,7 +43,7 @@ host controllers cannot depend on PCI and USB enumeration mechanisms either.
 So for those a different mechanism have to be used.
 
 In simplest cases OS and drivers can just probe for the connected devices.
-That basically means that a driver can try to interract with the device in
+That basically means that a driver can try to interact with the device in
 hope that it's there. If the device responds, then it must be there, and it
 doesn't respond, then it's not there. It doesn't work though with things like
 memory.
@@ -185,13 +185,13 @@ They basically describe how many 32-bit cells do we need to describe size and
 addresses. For 64-bit systems you'd need two cells to describe an address in
 memory.
 
-To take it a bit further, addresses and sizes don't necessary have to refer to
+To take it a bit further, addresses and sizes don't necessarily have to refer to
 addresses in memory. For example, I2C devices have addresses in context of I2C
 bus. Those are not memory addresses, but addresses nontheless. So what address
 means in a particular case depends on the node and its place in the tree.
 Consequently, you can have `#address-cells` and `#size-cells` in multiple
 nodes. Those parameters apply to all the children nodes of the node that
-contains them, unless overriden somewhere down the tree.
+contains them, unless overridden somewhere down the tree.
 
 Let's return to the example. For now we are working with memory addresses, so
 I will use two cells to specify addresses and sizes to support 64-bit memory:

@@ -67,7 +67,7 @@ as well:
 ```sh
 mkdir -p ws/efi
 cd ws/efi
-cp /usr/share/qemu/OVMF.fd
+cp /usr/share/qemu/OVMF.fd .
 mkdir root
 ```
 

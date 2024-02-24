@@ -84,7 +84,7 @@ and I will start with the idea of memory mapped device registers.
 In modern hardware systems (and actually in the old compute hardware as well),
 it's often the case that if you want to interact with a device, the interface
 you use look like memory access. For example, if you take a look at [PL011] to
-configure the serial interface you need to write a certain magice numbers to
+configure the serial interface you need to write a certain magic numbers to
 certain magic memory addresses. That's because the registers of the device are
 mapped to memory, meaning that they have actually memory addresses and attempts
 to read and write at those addresses result in reading and writing from the
@@ -225,7 +225,7 @@ ARM defines three different sharebility types for normal memory:
 * Inner shareable
 * Outer shareable
 
-*Non-shareble* memory is, as the name suggest, memory not used for
+*Non-shareable* memory is, as the name suggest, memory not used for
 communcations and therefore there is not need to maintain cache coherency for
 that memory.
 
@@ -240,14 +240,14 @@ explain coherently because ARM specification actually leaves it up to the
 hardware to decide.
 
 However, the general idea is that different parts of the system will be kept
-in sync for *inner* sharable memory and for *outer* shareble memory. When a CPU
+in sync for *inner* sharable memory and for *outer* shareable memory. When a CPU
 or device access a memory range that is marked as inner shareable, hardware will
 use the cache coherency protocol that will keep all the CPUs and devices in
 *the same inner shareability domain* in sync. When a CPU or devices access a
 memory marked as outer shareable, a cache coherency protocol that keeps all the
 CPUs and devices in *the same outer sharebility domain* in sync will be used.
 
-RAM specification says that each device or CPU (each agent) belongs to a single
+ARM specification says that each device or CPU (each agent) belongs to a single
 inner shareablity domain and a single outer sharebility domain. It additionally
 says that all devices in the same inner sharebility domain also must belong to
 the same outer shareability domain. So agents, inner sharebility domains and
@@ -268,7 +268,7 @@ So far so good, but how do we know what agents belong to what inner/outer
 shareable domain? ARM specification does not actually say that explicitly, so
 ultimately it's up to the specific hardware implementation.
 
-ARM specification, however, provides a guideance that the inner shareble domain
+ARM specification, however, provides a guidance that the inner shareable domain
 is expected to include all the CPUs controlled by the same OS/hypervisor. If I
 understand it correctly, in practice it means that all the CPUs that an OS has
 available are withing the same inner shareability domain. 
@@ -496,10 +496,10 @@ specific say that code executes in EL2, so the register the process will look
 at will be TTBR0\_EL2.
 
 > NOTE: Naturally the address has to be physical, otherwise processor will have
-> to translate it going into an inifite loop.
+> to translate it going into an infinite loop.
 
 From TTBR0\_EL2 process will take the physical address of the *level 1*
-translation table. This table basically is just a massive of 64-bit entries.
+translation table. This table basically is just a massive array of 64-bit entries.
 The exact size of the translation table, format of each entry and so on depends
 on the configuration.
 
@@ -510,7 +510,7 @@ the configuration.
 
 The next step is to find the entry corresponding to the virtual address `X`. In
 order to do that processor will look at a few significant high bits in the
-value `X` and use them as an indiex in the table.
+value `X` and use them as an index in the table.
 
 To cover the whole 1024 entries you need 10 bits and in our case processor will
 look at bits `X[51:42]` to decide which entry from the table it needs. For the
@@ -523,7 +523,7 @@ this case the process will look at `X[47:42]`.
 > that it's not that big of constraint at the moment.
 
 Now processor knows the right entry in the *level 1* table and it can decode it.
-There a few options for what the entry could described:
+There a few options for what the entry could describe:
 
 1. The entry might be invalid - that would mean that virtual address `X` is not
    mapped to any physical address, the translation will stop and processor will
@@ -561,7 +561,7 @@ at *level 3* that describes how to translate virtual address to a physical
 address. How would this entry look like and how do we use it to get a physical
 address?
 
-The entry at the *level 3* like that should contain an address of a contigous
+The entry at the *level 3* like that should contain an address of a contiguous
 64 KiB long range of physical memory - that's what we call a physical page. If
 we take unused bits of the `X` and use them as an offset within the page we
 will get a physical address.
@@ -595,7 +595,7 @@ Here are the attributes we are going to set:
 
 1. bits [47:16] - will contain a 64 KiB aligned physical address of a
    block; it will not be a physical address of 64 KiB page, but an address of
-   4 TiB contigous physical memory block because that's the size of memory a
+   4 TiB contiguous physical memory block because that's the size of memory a
    single entry at *level 1* is responsible for;
 2. bits [9:8] - sharebility attributes; we will use inner sharebale for
    everything and that is encoded as value `0b11`;
@@ -721,7 +721,7 @@ consequtevilty - one right after another. And the same applies for the
 > NOTE: In practice we might need just a single page at each level if we only
 > need to create a translation table for a small virtual address range.
 
-So why I mentioning this layout of pages in memory? It has a nice property that
+So why am I mentioning this layout of pages in memory? It has a nice property that
 all entries of the same level form a consequtive array of entries in memory.
 E.g. all entries at *level 1* that we need to fill form an array, all entries
 of *level 2* that we need to fill form an array, even if individual entries
@@ -874,7 +874,7 @@ recall what parameters do we need to configure:
 
 1. Translation granule - we have a choice between 4 KiB, 16 KiB and 64 KiB,
    remeber that I decided at the beginning that we will use 64 KiB granule;
-2. We will use a single contigous VA range, instead of splitting it in lower
+2. We will use a single contiguous VA range, instead of splitting it in lower
    and higher halfs;
 3. We will only support EL2 exception level for now;
 4. Finally, we will only have a single translation stage.
@@ -1090,7 +1090,7 @@ enum error_code memory_cpu_setup(void)
 
 # Testing
 
-How can we test that address transation was enabled and indeed works? One way
+How can we test that address translation was enabled and indeed works? One way
 to quickly verify that address translation is happening is to map two different
 ranges of the virtual address space to the same range of the physical address
 space. This way you would essentially create two different views of the same
@@ -1101,8 +1101,8 @@ Let's try to do that in a quick, dirty and not very generic way. This is also
 going to be a good exercise to explain effects of the TLB cache along the way.
 
 I'm not going to change fundamentally the structure of the translation table -
-it will still remain a simple array of 64 entries each describging how a
-contigous 4TiB long region of virtual address space maps on a contigous 4TiB
+it will still remain a simple array of 64 entries each describing how a
+contiguous 4TiB long region of virtual address space maps on a contiguous 4TiB
 long region of the physical memory. Instead, I'm going to pick one entry out of
 64 and point it to a different area of the physical memory.
 
@@ -1226,12 +1226,12 @@ Manual for A-profile architecture for the recommended way of doing it.
 
 The reference manual suggests to replace the entry with an invalid entry first
 and then with the entry we actually want to see. And on top of that the
-procedure is heavily re-inforced with memory barrier instructions along the way.
-This procedure does seem somewhat exsessive for our use case, but let's
+procedure is heavily reinforced with memory barrier instructions along the way.
+This procedure does seem somewhat excessive for our use case, but let's
 implement it nontheless.
 
 First, we need a few support functions. A few functions implementing the right
-memory barriers and another invalidting TLB.
+memory barriers and another invalidating TLB.
 
 ```asm
 pt_update_barrier:
@@ -1249,7 +1249,7 @@ pt_tlbi_barrier:
 > simpler this way.
 
 The argument of the `dsb` instruction specifies what type of a barrier behavior
-we want. The argumnet `ishst`, to put it simplistically, requires the `dsb`
+we want. The argument `ishst`, to put it simplistically, requires the `dsb`
 instruction to wait for all the previous memory writes to complete and their
 effects to become visible to everyone in the same inner shareable domain
 (specifically, other CPUs that potentially may access the same memory).
@@ -1272,10 +1272,10 @@ this for a wide variety of potential use cases. That's quite a complicated
 reading, but here is a clue that might help to find a simple version of the
 `tlbi` instruction that works for our use case: it does not make much of a
 difference to us whether we consider just the last level of the translation
-table walk or all the levels, since we have just a single level anyways. So we
+table walk or all the levels, since we have just a single level anyway. So we
 can use the version of the instruction that takes just a single virtual address.
 
-> NOTE: Also keep in mind that we are working with a single stage transation
+> NOTE: Also keep in mind that we are working with a single stage translation
 > table, in EL2 exception level and care only about internal shareability
 > domain.
 
@@ -1292,7 +1292,7 @@ tlb_invalidate_page:
 This function takes just one argument - virtual address within the range that
 we want to invalidate. It will invalidate cache for the last level of the
 translation table walk, keeping all the previous levels in cache. As I mentioned
-erlier it does not make much of a difference to us, but it's quite important to
+earlier it does not make much of a difference to us, but it's quite important to
 avoid dropping from the cache what can stay there in the case of real
 translation tables that may have multiple levels.
 
@@ -1382,6 +1382,6 @@ practical in the end (and frankly speaking, I probably made a few mistakes here
 and there).
 
 That being said, I think it was overall a useful exercise to get a level of
-understanding of address traslation tables in ARM. And I hope that provided
+understanding of address translation tables in ARM. And I hope that provided
 examples (both my code snippets and references to Linux Kernel implementation)
 are good enough to get some people started.

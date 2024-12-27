@@ -16,8 +16,8 @@ On the one hand it makes a lot of sense to use the simplest solution possible.
 On the other hand EFI complexity serves some purpose and with EFI you get a lot
 of useful tools right out of the box.
 
-With all that in mind let's try to cook up something with EFI. All the sources
-are available on [GitHub.](https://github.com/krinkinmu/efi)
+With all that in mind let's try to cook up something with EFI. Sources for this tutorial 
+are available on [GitHub.](https://github.com/krinkinmu/efi/commit/7c837b6)
 
 <!--more-->
 

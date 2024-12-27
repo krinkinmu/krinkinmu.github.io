@@ -184,32 +184,34 @@ typedef uint64_t efi_status_t;
 typedef uint64_t efi_uint_t;
 
 struct efi_simple_text_output_protocol {
-	efi_status (*unused1)(struct efi_simple_text_output_protocol *, bool);
+	efi_status_t (*unused1)(
+			struct efi_simple_text_output_protocol *,
+			bool);
 
-	efi_status (*output_string)(
+	efi_status_t (*output_string)(
 		struct efi_simple_text_output_protocol *self,
 		uint16_t *string);
 
-	efi_status (*unused2)(
+	efi_status_t (*unused2)(
 		struct efi_simple_text_output_protocol *,
 		uint16_t *);
-	efi_status (*unused3)(
+	efi_status_t (*unused3)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t, efi_uint_t *, efi_uint_t *);
-	efi_status (*unused4)(
+	efi_status_t (*unused4)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t);
-	efi_status (*unused5)(
+	efi_status_t (*unused5)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t);
 
-	efi_status (*clear_screen)(
+	efi_status_t (*clear_screen)(
 		struct efi_simple_text_output_protocol *self);
 
-	efi_status (*unused6)(
+	efi_status_t (*unused6)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t, efi_uint_t);
-	efi_status (*unused7)(
+	efi_status_t (*unused7)(
 		struct efi_simple_text_output_protocol *,
 		bool);
 

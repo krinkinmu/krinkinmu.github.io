@@ -23,7 +23,7 @@ are available on [GitHub.](https://github.com/krinkinmu/efi/commit/7c837b6)
 
 # The basics
 
-EFI has a publicly available specificaion that should serve as a reference:
+EFI has a publicly available specification that should serve as a reference:
 [UEFI Specification]. At the moment of writing the latest specification version
 available is 2.8.
 

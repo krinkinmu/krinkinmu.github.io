@@ -16,14 +16,14 @@ On the one hand it makes a lot of sense to use the simplest solution possible.
 On the other hand EFI complexity serves some purpose and with EFI you get a lot
 of useful tools right out of the box.
 
-With all that in mind let's try to cook up something with EFI. All the sources
-are available on [GitHub.](https://github.com/krinkinmu/efi)
+With all that in mind let's try to cook up something with EFI. Sources for this tutorial 
+are available on [GitHub.](https://github.com/krinkinmu/efi/commit/7c837b6)
 
 <!--more-->
 
 # The basics
 
-EFI has a publicly available specificaion that should serve as a reference:
+EFI has a publicly available specification that should serve as a reference:
 [UEFI Specification]. At the moment of writing the latest specification version
 available is 2.8.
 
@@ -184,32 +184,34 @@ typedef uint64_t efi_status_t;
 typedef uint64_t efi_uint_t;
 
 struct efi_simple_text_output_protocol {
-	efi_status (*unused1)(struct efi_simple_text_output_protocol *, bool);
+	efi_status_t (*unused1)(
+			struct efi_simple_text_output_protocol *,
+			bool);
 
-	efi_status (*output_string)(
+	efi_status_t (*output_string)(
 		struct efi_simple_text_output_protocol *self,
 		uint16_t *string);
 
-	efi_status (*unused2)(
+	efi_status_t (*unused2)(
 		struct efi_simple_text_output_protocol *,
 		uint16_t *);
-	efi_status (*unused3)(
+	efi_status_t (*unused3)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t, efi_uint_t *, efi_uint_t *);
-	efi_status (*unused4)(
+	efi_status_t (*unused4)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t);
-	efi_status (*unused5)(
+	efi_status_t (*unused5)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t);
 
-	efi_status (*clear_screen)(
+	efi_status_t (*clear_screen)(
 		struct efi_simple_text_output_protocol *self);
 
-	efi_status (*unused6)(
+	efi_status_t (*unused6)(
 		struct efi_simple_text_output_protocol *,
 		efi_uint_t, efi_uint_t);
-	efi_status (*unused7)(
+	efi_status_t (*unused7)(
 		struct efi_simple_text_output_protocol *,
 		bool);
 

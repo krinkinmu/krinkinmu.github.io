@@ -101,7 +101,7 @@ architecture, but you should get a general idea.
   zero. In x86 it would generate an exception, but in AArch64 they just
   defined what result the division by zero should be, and this way on AArch64
   there is no need to generate an exception, even though it doesn't
-  necessarily aggree with math.
+  necessarily agree with math.
 
 Not all conditions that we may want to handle are as problematic as illegal
 instructions. Another common kind of the situation we may want to react is an

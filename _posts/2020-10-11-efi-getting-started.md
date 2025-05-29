@@ -460,7 +460,7 @@ where storage is a rather broad term in this case.
 `-drive if=pflash,format=raw,file=/home/kmu/ws/efi/OVMF.fd` option tells QEMU to
 emulate a some kind of flash memory with content from the file
 `/home/kmu/ws/efi/OVMF.fd`. The `OVMF.fd` file contains the image of the UEFI
-firmaware that we installed earlier.
+firmware that we installed earlier.
 
 `-drive format=raw,file=fat:rw:root` option tells QEMU to simulate a disk-like
 device that contains a readable and writable FAT filesystem. The interesting
